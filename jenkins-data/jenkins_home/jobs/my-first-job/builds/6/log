@@ -1,0 +1,9 @@
+Started by user [8mha:////4JVTYco/hHUTMQrtKRcrZZ4aWhshywjp4g6Lau208Ud4AAAAmB+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAyBEgYe/dLi1CL9yvyilMQ8AKA9QPvBAAAA[0mYordan Strahinov
+Running as SYSTEM
+Building in workspace /var/jenkins_home/workspace/my-first-job
+[my-first-job] $ /bin/sh -xe /tmp/jenkins14545998469266758907.sh
++ NAME=YORDAN
++ LASTNAME=STRAHINOV
++ /var/jenkins_home/scripts/script_03_21.sh YORDAN STRAHINOV
+Hello sir, YORDAN STRAHINOV!!
+Finished: SUCCESS
