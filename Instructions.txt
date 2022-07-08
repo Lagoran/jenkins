@@ -7,9 +7,13 @@
     -to add local user to docker group
     groupadd -g Group_ID Group_Name
 
-    yordan@cml-6664:~/DevOps/jenkins$ sudo docker ps
-    CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+    -to ensure local user can execute commands with docker
+    sudo chmod 666 /var/run/docker.sock 
 
 -Docker-compose installation
     https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-20-04
-    
+
+-we've downoaded the jenkins image with:
+    docker pull jenkins/jenkins
+
+
