@@ -14,6 +14,4 @@ RUN chown remote_user:remote_user -R /home/remote_user/.ssh/ && \
 
 RUN /usr/sbin/sshd-keygen
 
-RUN yum -y install mysql
-
 CMD /usr/sbin/sshd -D
