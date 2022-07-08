@@ -9,3 +9,7 @@
 
     yordan@cml-6664:~/DevOps/jenkins$ sudo docker ps
     CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+-Docker-compose installation
+    https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-20-04
+    
