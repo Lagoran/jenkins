@@ -1,0 +1,7 @@
+-Install Docker on Ubuntu 20.04 LTS
+    https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04
+
+    -to start docker service afterwards
+    https://stackoverflow.com/questions/52197246/wsl-redis-encountered-system-has-not-been-booted-with-systemd-as-init-system-pi
+
+    
