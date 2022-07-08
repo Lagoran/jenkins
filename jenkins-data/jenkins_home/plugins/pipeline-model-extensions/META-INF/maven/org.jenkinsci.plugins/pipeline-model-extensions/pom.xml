@@ -27,7 +27,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.jenkinsci.plugins</groupId>
   <artifactId>pipeline-model-extensions</artifactId>
-  <version>2.2086.v12b_420f036e5</version>
+  <version>2.2097.v33db_b_de764b_e</version>
   <packaging>hpi</packaging>
   <name>Pipeline: Declarative Extension Points API</name>
   <description>APIs for extension points used in Declarative Pipelines</description>
@@ -49,7 +49,7 @@
   <scm child.scm.connection.inherit.append.path="false" child.scm.developerConnection.inherit.append.path="false" child.scm.url.inherit.append.path="false">
     <connection>scm:git:https://github.com/jenkinsci/pipeline-model-definition-plugin.git</connection>
     <developerConnection>scm:git:git@github.com:jenkinsci/pipeline-model-definition-plugin.git</developerConnection>
-    <tag>12b420f036e5e4d114791602b896c5790567f7a6</tag>
+    <tag>33dbbde764beac9772b1e1eefe1a2c6e3cdff14f</tag>
     <url>https://github.com/jenkinsci/pipeline-model-definition-plugin</url>
   </scm>
   <distributionManagement>
@@ -66,37 +66,37 @@
     <dependency>
       <groupId>org.jenkinsci.plugins</groupId>
       <artifactId>pipeline-model-api</artifactId>
-      <version>2.2086.v12b_420f036e5</version>
+      <version>2.2097.v33db_b_de764b_e</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.jenkins-ci.plugins.workflow</groupId>
       <artifactId>workflow-cps</artifactId>
-      <version>2686.v7c37e0578401</version>
+      <version>2692.v76b_089ccd026</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.jenkins-ci.plugins.workflow</groupId>
       <artifactId>workflow-job</artifactId>
-      <version>1174.vdcb_d054cf74a_</version>
+      <version>1182.v60a_e6279b_579</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.jenkins-ci.plugins</groupId>
       <artifactId>credentials</artifactId>
-      <version>1087.v16065d268466</version>
+      <version>1087.1089.v2f1b_9a_b_040e4</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.jenkins-ci.plugins</groupId>
       <artifactId>credentials-binding</artifactId>
-      <version>1.27.1</version>
+      <version>523.vd859a_4b_122e6</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.jenkins-ci.plugins</groupId>
       <artifactId>pipeline-stage-step</artifactId>
-      <version>291.vf0a8a7aeeb50</version>
+      <version>293.v200037eefcd5</version>
       <scope>compile</scope>
     </dependency>
     <dependency>

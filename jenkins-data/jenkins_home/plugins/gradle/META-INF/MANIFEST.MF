@@ -9,7 +9,7 @@ Group-Id: org.jenkins-ci.plugins
 Minimum-Java-Version: 1.8
 Extension-Name: gradle
 Jenkins-Version: 2.138.4
-Plugin-Version: 1.39.1
+Plugin-Version: 1.39.3
 Url: https://github.com/jenkinsci/gradle-plugin
 Short-Name: gradle
 

@@ -1,22 +1,21 @@
 Manifest-Version: 1.0
-Hudson-Version: 2.332.1
-Plugin-Dependencies: workflow-step-api:625.vd896b_f445a_f8,scm-api:608
- .vfa_f971c5a_a_e9
-Implementation-Title: Pipeline: API
-Long-Name: Pipeline: API
-Implementation-Version: 1164.v760c223ddb_32
-Group-Id: org.jenkins-ci.plugins.workflow
-Minimum-Java-Version: 1.8
-Plugin-License-Name: MIT License
-Specification-Title: Pipeline: API
-Plugin-ScmUrl: https://github.com/jenkinsci/workflow-api-plugin
-Plugin-Version: 1164.v760c223ddb_32
-Jenkins-Version: 2.332.1
-Url: https://github.com/jenkinsci/workflow-api-plugin
-Short-Name: workflow-api
-Plugin-License-Url: https://opensource.org/licenses/MIT
-Plugin-Developers: 
-Build-Jdk-Spec: 1.8
 Created-By: Maven Archiver 3.5.2
+Build-Jdk-Spec: 11
+Specification-Title: Pipeline: API
 Specification-Version: 0.0
+Implementation-Title: Pipeline: API
+Implementation-Version: 1182.v41475e53ea_43
+Group-Id: org.jenkins-ci.plugins.workflow
+Short-Name: workflow-api
+Long-Name: Pipeline: API
+Url: https://github.com/jenkinsci/workflow-api-plugin
+Plugin-Version: 1182.v41475e53ea_43
+Hudson-Version: 2.332.1
+Jenkins-Version: 2.332.1
+Plugin-Dependencies: workflow-step-api:625.vd896b_f445a_f8,scm-api:608.v
+ fa_f971c5a_a_e9
+Plugin-Developers: 
+Plugin-License-Name: MIT License
+Plugin-License-Url: https://opensource.org/licenses/MIT
+Plugin-ScmUrl: https://github.com/jenkinsci/workflow-api-plugin
 

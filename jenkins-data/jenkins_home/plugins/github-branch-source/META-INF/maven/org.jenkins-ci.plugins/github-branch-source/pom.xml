@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.jenkins-ci.plugins</groupId>
   <artifactId>github-branch-source</artifactId>
-  <version>1637.vd833b_7ca_7654</version>
+  <version>1656.v77eddb_b_e95df</version>
   <packaging>hpi</packaging>
   <name>GitHub Branch Source Plugin</name>
   <description>Multibranch projects and organization folders from GitHub. Maintained by CloudBees, Inc.</description>
@@ -17,9 +17,9 @@
     </license>
   </licenses>
   <scm>
-    <connection>scm:git:git://github.com/jenkinsci/github-branch-source-plugin.git</connection>
+    <connection>scm:git:https://github.com/jenkinsci/github-branch-source-plugin.git</connection>
     <developerConnection>scm:git:git@github.com:jenkinsci/github-branch-source-plugin.git</developerConnection>
-    <tag>d833b7ca7654cdc671c010c07a292ebc2a879d00</tag>
+    <tag>77eddbbe95df74dfccd19195717730b27bb4fa59</tag>
     <url>https://github.com/jenkinsci/github-branch-source-plugin</url>
   </scm>
   <distributionManagement>
@@ -54,13 +54,13 @@
     <dependency>
       <groupId>org.jenkins-ci.plugins.workflow</groupId>
       <artifactId>workflow-support</artifactId>
-      <version>813.vb_d7c3d2984a_0</version>
+      <version>817.v58126df57338</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>io.jenkins.plugins</groupId>
       <artifactId>jjwt-api</artifactId>
-      <version>0.11.2-5.143e44951c52</version>
+      <version>0.11.2-9.c8b45b8bb173</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -72,7 +72,7 @@
     <dependency>
       <groupId>org.jenkins-ci.main</groupId>
       <artifactId>jenkins-core</artifactId>
-      <version>2.323</version>
+      <version>2.332.1</version>
       <scope>provided</scope>
       <exclusions>
         <exclusion>
@@ -119,7 +119,7 @@
       <plugin>
         <groupId>org.jenkins-ci.tools</groupId>
         <artifactId>maven-hpi-plugin</artifactId>
-        <version>3.25</version>
+        <version>3.28</version>
         <extensions>true</extensions>
       </plugin>
       <plugin>

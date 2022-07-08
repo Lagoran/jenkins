@@ -16,4 +16,15 @@
 -we've downoaded the jenkins image with:
     docker pull jenkins/jenkins
 
+    -image is situated by default here:
+    yordan@cml-6664:~/DevOps/jenkins$ sudo du -h /var/lib/docker/ | sort -hr | head -n 10
+
+-we've developed a docker-compose file just for the jenkins container
+    yordan/DevOps/jenkins/jenkins-data/docker-compose/docker-compose-2.10.yaml
+
+-when running jenkins container we've found following passwowd for the initial setup
+    ba64b12497b9492cbb89cd1d8f76bedf
+
+-During the initial setup we use following credentials:
+admin/admin
 

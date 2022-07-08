@@ -1,2 +1,715 @@
-!function(e){function t(t){for(var n,o,i=t[0],a=t[1],d=t[2],u=0,f=[];u<i.length;u++)o=i[u],Object.prototype.hasOwnProperty.call(r,o)&&r[o]&&f.push(r[o][0]),r[o]=0;for(n in a)Object.prototype.hasOwnProperty.call(a,n)&&(e[n]=a[n]);for(c&&c(t);f.length;)f.shift()();return l.push.apply(l,d||[]),s()}function s(){for(var e,t=0;t<l.length;t++){for(var s=l[t],n=!0,i=1;i<s.length;i++){var a=s[i];0!==r[a]&&(n=!1)}n&&(l.splice(t--,1),e=o(o.s=s[0]))}return e}var n={},r={5:0},l=[];function o(t){if(n[t])return n[t].exports;var s=n[t]={i:t,l:!1,exports:{}};return e[t].call(s.exports,s,s.exports,o),s.l=!0,s.exports}o.m=e,o.c=n,o.d=function(e,t,s){o.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:s})},o.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},o.t=function(e,t){if(1&t&&(e=o(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var s=Object.create(null);if(o.r(s),Object.defineProperty(s,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var n in e)o.d(s,n,function(t){return e[t]}.bind(null,n));return s},o.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return o.d(t,"a",t),t},o.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},o.p="";var i=window.webpackJsonp=window.webpackJsonp||[],a=i.push.bind(i);i.push=t,i=i.slice();for(var d=0;d<i.length;d++)t(i[d]);var c=a;l.push([76,0]),s()}({76:function(e,t,s){e.exports=s(77)},77:function(e,t,s){"use strict";s.r(t);var n,r=s(10),l=s.n(r),o=document.getElementById("buildHistory"),i=o.querySelector(".build-search-row .jenkins-search"),a=o.querySelector(".build-search-row input"),d=document.getElementById("buildHistoryPage"),c=document.getElementById("properties"),u=d.getAttribute("page-ajax"),f=c.getAttribute("page-next-build"),p=document.getElementById("no-builds"),v=document.getElementById("side-panel"),g=document.getElementById("buildHistoryPageNav"),m=g.querySelectorAll(".pageOne")[0],b=g.querySelectorAll(".pageUp")[0],h=g.querySelectorAll(".pageDown")[0];function y(){isPageVisible()?new Ajax.Request(u,{requestHeaders:o.headers,onSuccess:function(e){var t=E(o),s=t.rows;s.length<=1&&'<table class="pane"></table>'===e.responseText?p.style.display="block":p.style.display="none";var n=0;for(s[n].classList.contains("build-search-row")&&n++;s.length>1&&s[n].classList.contains("transitive");)Element.remove(s[n]);var r=document.createElement("div");r.innerHTML=e.responseText,Behaviour.applySubtree(r);for(var l=s[n],i=E(r),a=i.rows;a.length>0;)void 0!==l?l.parentNode.insertBefore(a[0],l):t.getElementsByTagName("tbody")[0].appendChild(a[0]);i.classList.contains("hasPageData")&&d.setAttribute("page-entry-newest",i.getAttribute("page-entry-newest")),o.headers=["n",e.getResponseHeader("n")],k(),w()}}):w()}function w(){L(),n=window.setTimeout(y,5e3)}function L(){n&&(window.clearTimeout(n),n=void 0)}function O(){return"true"===d.getAttribute("page-has-up")}function S(){return"true"===d.getAttribute("page-has-down")}function E(e){return $(e).getElementsBySelector("table.pane")[0]}function B(){g.classList.remove("hasUpPage"),g.classList.remove("hasDownPage"),O()&&g.classList.add("hasUpPage"),S()&&g.classList.add("hasDownPage")}function P(e){if(e&&!e.classList.contains("overflow-checked")){var t=$(e).getElementsBySelector(".build-name")[0],s=$(e).getElementsBySelector(".build-details")[0];if(t&&s){var n,r=$(e).getElementsBySelector(".build-controls")[0],l=$(e).getElementsBySelector(".desc");l.length>0&&(n=l[0]),function(){e.classList.add("single-line"),e.classList.remove("multi-line");for(var n=$(e).getElementsBySelector(".block.wrap"),l=0;l<n.length;l++)L(n[l]);t.classList.remove("block"),t.removeAttribute("style"),s.classList.remove("block"),s.removeAttribute("style"),r&&(r.classList.remove("block"),s.removeAttribute("style"))}(),n&&h();var i,a=o.clientWidth-8,d=getElementOverflowParams(t),c=getElementOverflowParams(s);r&&(i=getElementOverflowParams(r)),S();var u=!1;if(d.isOverflowed||c.isOverflowed)if(h(),r){var f,p=!1,v=!0,g=!0;if(f=$(r).getElementsBySelector(".build-badge")[0])getElementOverflowParams(f).isOverflowed&&(p=!0,v=d.scrollWidth<a/2,g=c.scrollWidth<a/2);function m(e,t){$(e.element).setStyle({float:"left"}),$(t.element).setStyle({float:"right"}),(e.isOverflowed||t.isOverflowed)&&(!e.isOverflowed||t.isOverflowed?e.isOverflowed||!t.isOverflowed||$(t.element).setStyle({width:t.scrollWidth+"px"}):$(e.element).setStyle({width:e.scrollWidth+"px"}))}if((!p||v)&&d.scrollWidth+i.scrollWidth<=a)s.classList.add("block"),r.parentNode.removeChild(r),s.parentNode.insertBefore(r,s),(b=w(t,r)).classList.add("build-name-controls"),y(s),m(d=getElementOverflowParams(t),i),S(),O(t);else if((!p||g)&&c.scrollWidth+i.scrollWidth<=a){var b;t.classList.add("block"),y(b=w(s,r)),b.classList.add("build-details-controls"),m(c=getElementOverflowParams(s),i),S(),O(s)}else t.classList.add("block"),s.classList.add("block"),r.classList.add("block"),y(s),y(r),d=getElementOverflowParams(t),c=getElementOverflowParams(s),S();u=!0}else t.classList.add("block"),s.classList.add("block"),y(s);if(r&&!u)if(f=$(r).getElementsBySelector(".build-badge")[0])getElementOverflowParams(f).isOverflowed&&(h(),y(r),r.classList.add("block"),u=!0,S());d.isOverflowed||c.isOverflowed||u||(O(t),O(s)),e.classList.add("overflow-checked")}}function h(){e.classList.remove("single-line"),e.classList.add("multi-line")}function y(e){e.classList.add("indent-multiline")}function w(e,t){var s=document.createElement("div");return s.classList.add("block"),s.classList.add("wrap"),e.classList.add("wrapped"),t.classList.add("wrapped"),e.parentNode.insertBefore(s,e),e.parentNode.removeChild(e),t.parentNode.removeChild(t),s.appendChild(e),s.appendChild(t),s}function L(e){for(var t=$(e).getElementsBySelector(".wrapped"),s=0;s<t.length;s++){var n=t[s];n.parentNode.removeChild(n),e.parentNode.insertBefore(n,e),n.classList.remove("wrapped")}e.parentNode.removeChild(e)}function O(e){r&&e.clientHeight<r.clientHeight&&$(e).setStyle({height:r.clientHeight.toString()+"px"})}function S(){if(r){var e=$(r).getElementsBySelector(".build-badge")[0];if(e){var t,s=r.clientWidth,n=$(r).getElementsBySelector(".build-stop")[0];n?($(n).setStyle({width:"24px"}),t=s-24-4,r.classList.contains("indent-multiline")&&(t-=20),$(e).setStyle({width:t+"px"})):$(e).setStyle({width:"100%"})}i=getElementOverflowParams(r)}}}function k(){if(!isRunAsTest)for(var e=E(o).rows,t=0;t<e.length;t++){P(e[t])}}function A(e,t){var s=a.value;""!==s&&(void 0===e&&(e={}),e.search=s),new Ajax.Request(u+toQueryString(e),{onSuccess:function(e){i.classList.remove("jenkins-search--loading"),o.classList.remove("jenkins-pane--loading"),'<table class="pane"></table>'===e.responseText?p.style.display="block":p.style.display="none";for(var s=E(o).getElementsByTagName("tbody")[0],n=s.getElementsByClassName("build-row");n.length>0;)Element.remove(n[0]);var r=document.createElement("div");r.innerHTML=e.responseText,Behaviour.applySubtree(r);for(var l=E(r),c=l.rows;c.length>0;)s.appendChild(c[0]);k(),function(e){d.setAttribute("page-has-up",e.getAttribute("page-has-up")),d.setAttribute("page-has-down",e.getAttribute("page-has-down")),d.setAttribute("page-entry-newest",e.getAttribute("page-entry-newest")),d.setAttribute("page-entry-oldest",e.getAttribute("page-entry-oldest"))}(l),B(),O()||w(),t&&a.focus()}})}var x=l()((function(){A({},!0)}),300);document.addEventListener("DOMContentLoaded",(function(){a.addEventListener("input",(function(){i.classList.add("jenkins-search--loading"),o.classList.add("jenkins-pane--loading"),p.style.display="none",x()})),isRunAsTest||o.hasClassName("collapsed")||(o.headers=["n",f],w(),k(),onBuildHistoryChange((function(){k()})),v.observe("mouseover",(function(){g.classList.add("mouseOverSidePanel")})),v.observe("mouseout",(function(){g.classList.remove("mouseOverSidePanel")})),o.observe("mouseover",(function(){g.classList.add("mouseOverSidePanelBuildHistory")})),o.observe("mouseout",(function(){g.classList.remove("mouseOverSidePanelBuildHistory")})),m.observe("click",(function(){A()})),b.observe("click",(function(){A({"newer-than":d.getAttribute("page-entry-newest")})})),h.observe("click",(function(){S()?(L(),A({"older-than":d.getAttribute("page-entry-oldest")})):A()})),B())}))}});
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// install a JSONP callback for chunk loading
+/******/ 	function webpackJsonpCallback(data) {
+/******/ 		var chunkIds = data[0];
+/******/ 		var moreModules = data[1];
+/******/ 		var executeModules = data[2];
+/******/
+/******/ 		// add "moreModules" to the modules object,
+/******/ 		// then flag all "chunkIds" as loaded and fire callback
+/******/ 		var moduleId, chunkId, i = 0, resolves = [];
+/******/ 		for(;i < chunkIds.length; i++) {
+/******/ 			chunkId = chunkIds[i];
+/******/ 			if(Object.prototype.hasOwnProperty.call(installedChunks, chunkId) && installedChunks[chunkId]) {
+/******/ 				resolves.push(installedChunks[chunkId][0]);
+/******/ 			}
+/******/ 			installedChunks[chunkId] = 0;
+/******/ 		}
+/******/ 		for(moduleId in moreModules) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
+/******/ 				modules[moduleId] = moreModules[moduleId];
+/******/ 			}
+/******/ 		}
+/******/ 		if(parentJsonpFunction) parentJsonpFunction(data);
+/******/
+/******/ 		while(resolves.length) {
+/******/ 			resolves.shift()();
+/******/ 		}
+/******/
+/******/ 		// add entry modules from loaded chunk to deferred list
+/******/ 		deferredModules.push.apply(deferredModules, executeModules || []);
+/******/
+/******/ 		// run deferred modules when all chunks ready
+/******/ 		return checkDeferredModules();
+/******/ 	};
+/******/ 	function checkDeferredModules() {
+/******/ 		var result;
+/******/ 		for(var i = 0; i < deferredModules.length; i++) {
+/******/ 			var deferredModule = deferredModules[i];
+/******/ 			var fulfilled = true;
+/******/ 			for(var j = 1; j < deferredModule.length; j++) {
+/******/ 				var depId = deferredModule[j];
+/******/ 				if(installedChunks[depId] !== 0) fulfilled = false;
+/******/ 			}
+/******/ 			if(fulfilled) {
+/******/ 				deferredModules.splice(i--, 1);
+/******/ 				result = __webpack_require__(__webpack_require__.s = deferredModule[0]);
+/******/ 			}
+/******/ 		}
+/******/
+/******/ 		return result;
+/******/ 	}
+/******/
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// object to store loaded and loading chunks
+/******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 	// Promise = chunk loading, 0 = chunk loaded
+/******/ 	var installedChunks = {
+/******/ 		4: 0
+/******/ 	};
+/******/
+/******/ 	var deferredModules = [];
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	var jsonpArray = window["webpackJsonp"] = window["webpackJsonp"] || [];
+/******/ 	var oldJsonpFunction = jsonpArray.push.bind(jsonpArray);
+/******/ 	jsonpArray.push = webpackJsonpCallback;
+/******/ 	jsonpArray = jsonpArray.slice();
+/******/ 	for(var i = 0; i < jsonpArray.length; i++) webpackJsonpCallback(jsonpArray[i]);
+/******/ 	var parentJsonpFunction = oldJsonpFunction;
+/******/
+/******/
+/******/ 	// add entry module to deferred list
+/******/ 	deferredModules.push([73,0]);
+/******/ 	// run deferred modules when ready
+/******/ 	return checkDeferredModules();
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ 73:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(74);
+
+
+/***/ }),
+
+/***/ 74:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(10);
+/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash_debounce__WEBPACK_IMPORTED_MODULE_0__);
+
+const buildHistoryContainer = document.getElementById("buildHistory");
+const pageSearchInputContainer = buildHistoryContainer.querySelector('.build-search-row .jenkins-search');
+const pageSearchInput = buildHistoryContainer.querySelector('.build-search-row input');
+const buildHistoryPage = document.getElementById("buildHistoryPage");
+const properties = document.getElementById("properties");
+const ajaxUrl = buildHistoryPage.getAttribute("page-ajax");
+const nextBuild = properties.getAttribute("page-next-build");
+const noBuildsBanner = document.getElementById("no-builds");
+const sidePanel = document.getElementById('side-panel');
+const buildHistoryPageNav = document.getElementById('buildHistoryPageNav');
+const pageOne = buildHistoryPageNav.querySelectorAll('.pageOne')[0];
+const pageUp = buildHistoryPageNav.querySelectorAll('.pageUp')[0];
+const pageDown = buildHistoryPageNav.querySelectorAll('.pageDown')[0];
+const leftRightPadding = 4;
+const updateBuildsRefreshInterval = 5000;
+
+function updateBuilds() {
+  if (isPageVisible()) {
+    new Ajax.Request(ajaxUrl, {
+      requestHeaders: buildHistoryContainer.headers,
+      onSuccess: function (rsp) {
+        var dataTable = getDataTable(buildHistoryContainer);
+        var rows = dataTable.rows; // Check there are no existing rows (except the search bar) before showing the no builds banner
+
+        if (rows.length <= 1 && rsp.responseText === "<table class=\"pane\"></table>") {
+          noBuildsBanner.style.display = "block";
+        } else {
+          noBuildsBanner.style.display = "none";
+        } //delete rows with transitive data
+
+
+        var firstBuildRow = 0;
+
+        if (rows[firstBuildRow].classList.contains('build-search-row')) {
+          firstBuildRow++;
+        }
+
+        while (rows.length > 1 && rows[firstBuildRow].classList.contains('transitive')) {
+          Element.remove(rows[firstBuildRow]);
+        } // insert new rows
+
+
+        var div = document.createElement('div');
+        div.innerHTML = rsp.responseText;
+        Behaviour.applySubtree(div);
+        var pivot = rows[firstBuildRow];
+        var newDataTable = getDataTable(div);
+        var newRows = newDataTable.rows;
+
+        while (newRows.length > 0) {
+          if (pivot !== undefined) {
+            // The data table has rows.  Insert before a "pivot" row (first row).
+            pivot.parentNode.insertBefore(newRows[0], pivot);
+          } else {
+            // The data table has no rows.  In this case, we just add all new rows directly to the
+            // table, one after the other i.e. we don't insert before a "pivot" row (first row).
+            dataTable.getElementsByTagName("tbody")[0].appendChild(newRows[0]);
+          }
+        }
+
+        if (newDataTable.classList.contains('hasPageData')) {
+          buildHistoryPage.setAttribute('page-entry-newest', newDataTable.getAttribute('page-entry-newest'));
+        } // next update
+
+
+        buildHistoryContainer.headers = ["n", rsp.getResponseHeader("n")];
+        checkAllRowCellOverflows();
+        createRefreshTimeout();
+      }
+    });
+  } else {
+    createRefreshTimeout();
+  }
+}
+
+var buildRefreshTimeout;
+
+function createRefreshTimeout() {
+  cancelRefreshTimeout();
+  buildRefreshTimeout = window.setTimeout(updateBuilds, updateBuildsRefreshInterval);
+}
+
+function cancelRefreshTimeout() {
+  if (buildRefreshTimeout) {
+    window.clearTimeout(buildRefreshTimeout);
+    buildRefreshTimeout = undefined;
+  }
+}
+
+function hasPageUp() {
+  return buildHistoryPage.getAttribute('page-has-up') === 'true';
+}
+
+function hasPageDown() {
+  return buildHistoryPage.getAttribute('page-has-down') === 'true';
+}
+
+function getNewestEntryId() {
+  return buildHistoryPage.getAttribute('page-entry-newest');
+}
+
+function getOldestEntryId() {
+  return buildHistoryPage.getAttribute('page-entry-oldest');
+}
+
+function getDataTable(buildHistoryDiv) {
+  return $(buildHistoryDiv).getElementsBySelector('table.pane')[0];
+}
+
+function updatePageParams(dataTable) {
+  buildHistoryPage.setAttribute('page-has-up', dataTable.getAttribute('page-has-up'));
+  buildHistoryPage.setAttribute('page-has-down', dataTable.getAttribute('page-has-down'));
+  buildHistoryPage.setAttribute('page-entry-newest', dataTable.getAttribute('page-entry-newest'));
+  buildHistoryPage.setAttribute('page-entry-oldest', dataTable.getAttribute('page-entry-oldest'));
+}
+
+function togglePageUpDown() {
+  buildHistoryPageNav.classList.remove('hasUpPage');
+  buildHistoryPageNav.classList.remove('hasDownPage');
+
+  if (hasPageUp()) {
+    buildHistoryPageNav.classList.add('hasUpPage');
+  }
+
+  if (hasPageDown()) {
+    buildHistoryPageNav.classList.add('hasDownPage');
+  }
+}
+
+function checkRowCellOverflows(row) {
+  if (!row) {
+    return;
+  }
+
+  if (row.classList.contains('overflow-checked')) {
+    // already done.
+    return;
+  }
+
+  function markSingleline() {
+    row.classList.add('single-line');
+    row.classList.remove('multi-line');
+  }
+
+  function markMultiline() {
+    row.classList.remove('single-line');
+    row.classList.add('multi-line');
+  }
+
+  function indentMultiline(element) {
+    element.classList.add('indent-multiline');
+  }
+
+  function blockWrap(el1, el2) {
+    var div = document.createElement('div');
+    div.classList.add('block');
+    div.classList.add('wrap');
+    el1.classList.add('wrapped');
+    el2.classList.add('wrapped');
+    el1.parentNode.insertBefore(div, el1);
+    el1.parentNode.removeChild(el1);
+    el2.parentNode.removeChild(el2);
+    div.appendChild(el1);
+    div.appendChild(el2);
+    return div;
+  }
+
+  function blockUnwrap(element) {
+    var wrapped = $(element).getElementsBySelector('.wrapped');
+
+    for (var i = 0; i < wrapped.length; i++) {
+      var wrappedEl = wrapped[i];
+      wrappedEl.parentNode.removeChild(wrappedEl);
+      element.parentNode.insertBefore(wrappedEl, element);
+      wrappedEl.classList.remove('wrapped');
+    }
+
+    element.parentNode.removeChild(element);
+  }
+
+  var buildName = $(row).getElementsBySelector('.build-name')[0];
+  var buildDetails = $(row).getElementsBySelector('.build-details')[0];
+
+  if (!buildName || !buildDetails) {
+    return;
+  }
+
+  var buildControls = $(row).getElementsBySelector('.build-controls')[0];
+  var desc;
+  var descElements = $(row).getElementsBySelector('.desc');
+
+  if (descElements.length > 0) {
+    desc = descElements[0];
+  }
+
+  function resetCellOverflows() {
+    markSingleline(); // undo block wraps
+
+    var blockWraps = $(row).getElementsBySelector('.block.wrap');
+
+    for (var i = 0; i < blockWraps.length; i++) {
+      blockUnwrap(blockWraps[i]);
+    }
+
+    buildName.classList.remove('block');
+    buildName.removeAttribute('style');
+    buildDetails.classList.remove('block');
+    buildDetails.removeAttribute('style');
+
+    if (buildControls) {
+      buildControls.classList.remove('block');
+      buildDetails.removeAttribute('style');
+    }
+  } // Undo everything from the previous poll.
+
+
+  resetCellOverflows(); // Mark the text as multiline, if it has more than one line
+
+  if (desc) {
+    markMultiline();
+  }
+
+  var rowWidth = buildHistoryContainer.clientWidth;
+  var usableRowWidth = rowWidth - leftRightPadding * 2;
+  var nameOverflowParams = getElementOverflowParams(buildName);
+  var detailsOverflowParams = getElementOverflowParams(buildDetails);
+  var controlsOverflowParams;
+
+  if (buildControls) {
+    controlsOverflowParams = getElementOverflowParams(buildControls);
+  }
+
+  function fitToControlsHeight(element) {
+    if (buildControls) {
+      if (element.clientHeight < buildControls.clientHeight) {
+        $(element).setStyle({
+          height: buildControls.clientHeight.toString() + 'px'
+        });
+      }
+    }
+  }
+
+  function setBuildControlWidths() {
+    if (buildControls) {
+      var buildBadge = $(buildControls).getElementsBySelector('.build-badge')[0];
+
+      if (buildBadge) {
+        var buildControlsWidth = buildControls.clientWidth;
+        var buildBadgeWidth;
+        var buildStop = $(buildControls).getElementsBySelector('.build-stop')[0];
+
+        if (buildStop) {
+          $(buildStop).setStyle({
+            width: '24px'
+          }); // Minus 24 for the buildStop width,
+          // minus 4 for left+right padding in the controls container
+
+          buildBadgeWidth = buildControlsWidth - 24 - leftRightPadding;
+
+          if (buildControls.classList.contains('indent-multiline')) {
+            buildBadgeWidth = buildBadgeWidth - 20;
+          }
+
+          $(buildBadge).setStyle({
+            width: buildBadgeWidth + 'px'
+          });
+        } else {
+          $(buildBadge).setStyle({
+            width: '100%'
+          });
+        }
+      }
+
+      controlsOverflowParams = getElementOverflowParams(buildControls);
+    }
+  }
+
+  setBuildControlWidths();
+  var controlsRepositioned = false;
+
+  if (nameOverflowParams.isOverflowed || detailsOverflowParams.isOverflowed) {
+    // At least one of the cells (name or details) needs to move to a row of its own.
+    markMultiline();
+
+    if (buildControls) {
+      // We have build controls. Lets see can we find a combination that allows the build controls
+      // to sit beside either the build name or the build details.
+      var badgesOverflowing = false;
+      var nameLessThanHalf = true;
+      var detailsLessThanHalf = true;
+      var buildBadge = $(buildControls).getElementsBySelector('.build-badge')[0];
+
+      if (buildBadge) {
+        var badgeOverflowParams = getElementOverflowParams(buildBadge);
+
+        if (badgeOverflowParams.isOverflowed) {
+          // The badges are also overflowing. In this case, we will only attempt to
+          // put the controls on the same line as the name or details (see below)
+          // if the name or details is using less than half the width of the build history
+          // widget.
+          badgesOverflowing = true;
+          nameLessThanHalf = nameOverflowParams.scrollWidth < usableRowWidth / 2;
+          detailsLessThanHalf = detailsOverflowParams.scrollWidth < usableRowWidth / 2;
+        }
+      }
+
+      function expandLeftWithRight(leftCellOverFlowParams, rightCellOverflowParams) {
+        // Float them left and right...
+        $(leftCellOverFlowParams.element).setStyle({
+          float: 'left'
+        });
+        $(rightCellOverflowParams.element).setStyle({
+          float: 'right'
+        });
+
+        if (!leftCellOverFlowParams.isOverflowed && !rightCellOverflowParams.isOverflowed) {
+          // If neither left nor right are overflowed, just leave as is and let them float left and right.
+          return;
+        }
+
+        if (leftCellOverFlowParams.isOverflowed && !rightCellOverflowParams.isOverflowed) {
+          $(leftCellOverFlowParams.element).setStyle({
+            width: leftCellOverFlowParams.scrollWidth + 'px'
+          });
+          return;
+        }
+
+        if (!leftCellOverFlowParams.isOverflowed && rightCellOverflowParams.isOverflowed) {
+          $(rightCellOverflowParams.element).setStyle({
+            width: rightCellOverflowParams.scrollWidth + 'px'
+          });
+          return;
+        }
+      }
+
+      if ((!badgesOverflowing || nameLessThanHalf) && nameOverflowParams.scrollWidth + controlsOverflowParams.scrollWidth <= usableRowWidth) {
+        // Build name and controls can go on one row (first row). Need to move build details down
+        // to a row of its own (second row) by making it a block element, forcing it to wrap. If there
+        // are controls, we move them up to position them after the build name by inserting before the
+        // build details.
+        buildDetails.classList.add('block');
+        buildControls.parentNode.removeChild(buildControls);
+        buildDetails.parentNode.insertBefore(buildControls, buildDetails);
+        var wrap = blockWrap(buildName, buildControls);
+        wrap.classList.add('build-name-controls');
+        indentMultiline(buildDetails);
+        nameOverflowParams = getElementOverflowParams(buildName); // recalculate
+
+        expandLeftWithRight(nameOverflowParams, controlsOverflowParams);
+        setBuildControlWidths();
+        fitToControlsHeight(buildName);
+      } else if ((!badgesOverflowing || detailsLessThanHalf) && detailsOverflowParams.scrollWidth + controlsOverflowParams.scrollWidth <= usableRowWidth) {
+        // Build details and controls can go on one row. Need to make the
+        // build name (first field) a block element, forcing the details and controls to wrap
+        // onto the next row (creating a second row).
+        buildName.classList.add('block');
+        var wrap = blockWrap(buildDetails, buildControls);
+        indentMultiline(wrap);
+        wrap.classList.add('build-details-controls');
+        detailsOverflowParams = getElementOverflowParams(buildDetails); // recalculate
+
+        expandLeftWithRight(detailsOverflowParams, controlsOverflowParams);
+        setBuildControlWidths();
+        fitToControlsHeight(buildDetails);
+      } else {
+        // No suitable combo fits on a row. All need to go on rows of their own.
+        buildName.classList.add('block');
+        buildDetails.classList.add('block');
+        buildControls.classList.add('block');
+        indentMultiline(buildDetails);
+        indentMultiline(buildControls);
+        nameOverflowParams = getElementOverflowParams(buildName); // recalculate
+
+        detailsOverflowParams = getElementOverflowParams(buildDetails); // recalculate
+
+        setBuildControlWidths();
+      }
+
+      controlsRepositioned = true;
+    } else {
+      buildName.classList.add('block');
+      buildDetails.classList.add('block');
+      indentMultiline(buildDetails);
+    }
+  }
+
+  if (buildControls && !controlsRepositioned) {
+    var buildBadge = $(buildControls).getElementsBySelector('.build-badge')[0];
+
+    if (buildBadge) {
+      var badgeOverflowParams = getElementOverflowParams(buildBadge);
+
+      if (badgeOverflowParams.isOverflowed) {
+        markMultiline();
+        indentMultiline(buildControls);
+        buildControls.classList.add('block');
+        controlsRepositioned = true;
+        setBuildControlWidths();
+      }
+    }
+  }
+
+  if (!nameOverflowParams.isOverflowed && !detailsOverflowParams.isOverflowed && !controlsRepositioned) {
+    fitToControlsHeight(buildName);
+    fitToControlsHeight(buildDetails);
+  }
+
+  row.classList.add('overflow-checked');
+}
+
+function checkAllRowCellOverflows() {
+  if (isRunAsTest) {
+    return;
+  }
+
+  var dataTable = getDataTable(buildHistoryContainer);
+  var rows = dataTable.rows;
+
+  for (var i = 0; i < rows.length; i++) {
+    var row = rows[i];
+    checkRowCellOverflows(row);
+  }
+}
+
+function loadPage(params, focusOnSearch) {
+  var searchString = pageSearchInput.value;
+
+  if (searchString !== '') {
+    if (params === undefined) {
+      params = {};
+    }
+
+    params.search = searchString;
+  }
+
+  new Ajax.Request(ajaxUrl + toQueryString(params), {
+    onSuccess: function (rsp) {
+      pageSearchInputContainer.classList.remove("jenkins-search--loading");
+      buildHistoryContainer.classList.remove("jenkins-pane--loading");
+
+      if (rsp.responseText === "<table class=\"pane\"></table>") {
+        noBuildsBanner.style.display = "block";
+      } else {
+        noBuildsBanner.style.display = "none";
+      }
+
+      var dataTable = getDataTable(buildHistoryContainer);
+      var tbody = dataTable.getElementsByTagName("tbody")[0];
+      var rows = tbody.getElementsByClassName("build-row"); // Delete all build rows
+
+      while (rows.length > 0) {
+        Element.remove(rows[0]);
+      } // insert new rows
+
+
+      var div = document.createElement('div');
+      div.innerHTML = rsp.responseText;
+      Behaviour.applySubtree(div);
+      var newDataTable = getDataTable(div);
+      var newRows = newDataTable.rows;
+
+      while (newRows.length > 0) {
+        tbody.appendChild(newRows[0]);
+      }
+
+      checkAllRowCellOverflows();
+      updatePageParams(newDataTable);
+      togglePageUpDown();
+
+      if (!hasPageUp()) {
+        createRefreshTimeout();
+      }
+
+      if (focusOnSearch) {
+        pageSearchInput.focus();
+      }
+    }
+  });
+}
+
+const handleFilter = function () {
+  loadPage({}, true);
+};
+
+const debouncedFilter = lodash_debounce__WEBPACK_IMPORTED_MODULE_0___default()(handleFilter, 300);
+document.addEventListener("DOMContentLoaded", function () {
+  // Apply correct styling upon filter bar text change, call API after wait
+  pageSearchInput.addEventListener('input', function () {
+    pageSearchInputContainer.classList.add("jenkins-search--loading");
+    buildHistoryContainer.classList.add("jenkins-pane--loading");
+    noBuildsBanner.style.display = "none";
+    debouncedFilter();
+  });
+  if (isRunAsTest) return; // If the build history pane is collapsed, just return immediately and don't set up
+  // the build history refresh.
+
+  if (buildHistoryContainer.hasClassName('collapsed')) {
+    return;
+  }
+
+  buildHistoryContainer.headers = ["n", nextBuild];
+  createRefreshTimeout();
+  checkAllRowCellOverflows(); // Show/hide the nav as the mouse moves into the sidepanel and build history.
+
+  sidePanel.observe('mouseover', function () {
+    buildHistoryPageNav.classList.add('mouseOverSidePanel');
+  });
+  sidePanel.observe('mouseout', function () {
+    buildHistoryPageNav.classList.remove('mouseOverSidePanel');
+  });
+  buildHistoryContainer.observe('mouseover', function () {
+    buildHistoryPageNav.classList.add('mouseOverSidePanelBuildHistory');
+  });
+  buildHistoryContainer.observe('mouseout', function () {
+    buildHistoryPageNav.classList.remove('mouseOverSidePanelBuildHistory');
+  });
+  pageOne.observe('click', function () {
+    loadPage();
+  });
+  pageUp.observe('click', function () {
+    loadPage({
+      'newer-than': getNewestEntryId()
+    });
+  });
+  pageDown.observe('click', function () {
+    if (hasPageDown()) {
+      cancelRefreshTimeout();
+      loadPage({
+        'older-than': getOldestEntryId()
+      });
+    } else {
+      // wrap back around to the top
+      loadPage();
+    }
+  });
+  togglePageUpDown();
+});
+
+/***/ })
+
+/******/ });
 //# sourceMappingURL=filter-build-history.js.map

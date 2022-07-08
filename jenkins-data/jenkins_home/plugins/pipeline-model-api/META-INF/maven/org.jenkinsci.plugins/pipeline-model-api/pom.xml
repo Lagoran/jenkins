@@ -27,7 +27,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.jenkinsci.plugins</groupId>
   <artifactId>pipeline-model-api</artifactId>
-  <version>2.2086.v12b_420f036e5</version>
+  <version>2.2097.v33db_b_de764b_e</version>
   <packaging>hpi</packaging>
   <name>Pipeline: Model API</name>
   <description>Model API for Declarative Pipeline</description>
@@ -49,7 +49,7 @@
   <scm child.scm.connection.inherit.append.path="false" child.scm.developerConnection.inherit.append.path="false" child.scm.url.inherit.append.path="false">
     <connection>scm:git:https://github.com/jenkinsci/pipeline-model-definition-plugin.git</connection>
     <developerConnection>scm:git:git@github.com:jenkinsci/pipeline-model-definition-plugin.git</developerConnection>
-    <tag>12b420f036e5e4d114791602b896c5790567f7a6</tag>
+    <tag>33dbbde764beac9772b1e1eefe1a2c6e3cdff14f</tag>
     <url>https://github.com/jenkinsci/pipeline-model-definition-plugin</url>
   </scm>
   <distributionManagement>
@@ -66,7 +66,7 @@
     <dependency>
       <groupId>org.jenkins-ci.plugins</groupId>
       <artifactId>jackson2-api</artifactId>
-      <version>2.13.2.20220328-273.v11d70a_b_a_1a_52</version>
+      <version>2.13.3-285.vc03c0256d517</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -84,13 +84,13 @@
     <dependency>
       <groupId>org.jenkins-ci.plugins.workflow</groupId>
       <artifactId>workflow-step-api</artifactId>
-      <version>622.vb_8e7c15b_c95a_</version>
+      <version>625.vd896b_f445a_f8</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.jenkins-ci.plugins</groupId>
       <artifactId>structs</artifactId>
-      <version>308.v852b473a2b8c</version>
+      <version>318.va_f3ccb_729b_71</version>
       <scope>compile</scope>
     </dependency>
     <dependency>

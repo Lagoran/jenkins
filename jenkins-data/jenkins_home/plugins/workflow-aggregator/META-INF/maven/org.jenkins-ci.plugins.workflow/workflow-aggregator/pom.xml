@@ -27,7 +27,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.jenkins-ci.plugins.workflow</groupId>
   <artifactId>workflow-aggregator</artifactId>
-  <version>581.v0c46fa_697ffd</version>
+  <version>590.v6a_d052e5a_a_b_5</version>
   <packaging>hpi</packaging>
   <name>Pipeline</name>
   <description>The Jenkins Plugins Parent POM Project</description>
@@ -42,7 +42,7 @@
   <scm>
     <connection>scm:git:git://github.com/jenkinsci/workflow-aggregator-plugin.git</connection>
     <developerConnection>scm:git:git@github.com:jenkinsci/workflow-aggregator-plugin.git</developerConnection>
-    <tag>0c46fa697ffd8a1ca61b87d51ec91ea4a0746453</tag>
+    <tag>6ad052e5aab513815e8c5b9204636f2741d2bfae</tag>
     <url>https://github.com/jenkinsci/workflow-aggregator-plugin</url>
   </scm>
   <distributionManagement>
@@ -71,7 +71,7 @@
     <dependency>
       <groupId>io.jenkins.plugins</groupId>
       <artifactId>pipeline-groovy-lib</artifactId>
-      <version>589.vb_a_b_4a_a_8c443c</version>
+      <version>591.v3a_7f422b_d058</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -89,7 +89,7 @@
     <dependency>
       <groupId>org.jenkins-ci.plugins.workflow</groupId>
       <artifactId>workflow-multibranch</artifactId>
-      <version>712.vc169a_1387405</version>
+      <version>716.vc692a_e52371b_</version>
       <scope>compile</scope>
     </dependency>
     <dependency>

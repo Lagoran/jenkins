@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.jenkins-ci.plugins</groupId>
   <artifactId>email-ext</artifactId>
-  <version>2.88</version>
+  <version>2.89</version>
   <packaging>hpi</packaging>
   <name>Email Extension Plugin</name>
   <description>Allows to configure every aspect of email notifications: when an email is sent, who should receive it and what the email says</description>
@@ -75,7 +75,7 @@
   <scm>
     <connection>scm:git:https://github.com/jenkinsci/email-ext-plugin.git</connection>
     <developerConnection>scm:git:git@github.com:jenkinsci/email-ext-plugin.git</developerConnection>
-    <tag>email-ext-2.88</tag>
+    <tag>email-ext-2.89</tag>
     <url>https://github.com/jenkinsci/email-ext-plugin</url>
   </scm>
   <issueManagement>
@@ -96,7 +96,7 @@
     <dependency>
       <groupId>org.jsoup</groupId>
       <artifactId>jsoup</artifactId>
-      <version>1.14.3</version>
+      <version>1.15.1</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -108,31 +108,31 @@
     <dependency>
       <groupId>org.jenkins-ci.plugins</groupId>
       <artifactId>jackson2-api</artifactId>
-      <version>2.13.2.20220328-273.v11d70a_b_a_1a_52</version>
+      <version>2.13.3-285.vc03c0256d517</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.jenkins-ci.plugins</groupId>
       <artifactId>junit</artifactId>
-      <version>1.53</version>
+      <version>1.54</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.jenkins-ci.plugins</groupId>
       <artifactId>matrix-project</artifactId>
-      <version>758.v7a_ea_491852f3</version>
+      <version>771.v574584b_39e60</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.jenkins-ci.plugins</groupId>
       <artifactId>mailer</artifactId>
-      <version>408.vd726a_1130320</version>
+      <version>414.vcc4c33714601</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.jenkins-ci.plugins</groupId>
       <artifactId>config-file-provider</artifactId>
-      <version>3.9.0</version>
+      <version>3.10.0</version>
       <scope>compile</scope>
       <optional>true</optional>
     </dependency>
@@ -145,25 +145,25 @@
     <dependency>
       <groupId>org.jenkins-ci.plugins</groupId>
       <artifactId>structs</artifactId>
-      <version>308.v852b473a2b8c</version>
+      <version>318.va_f3ccb_729b_71</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.jenkins-ci.plugins</groupId>
       <artifactId>credentials</artifactId>
-      <version>2.6.1</version>
+      <version>2.6.1.1</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.jenkins-ci.plugins</groupId>
       <artifactId>scm-api</artifactId>
-      <version>602.v6a_81757a_31d2</version>
+      <version>608.vfa_f971c5a_a_e9</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.jenkins-ci.plugins.workflow</groupId>
       <artifactId>workflow-step-api</artifactId>
-      <version>622.vb_8e7c15b_c95a_</version>
+      <version>625.vd896b_f445a_f8</version>
       <scope>compile</scope>
       <optional>true</optional>
     </dependency>
@@ -183,7 +183,7 @@
     <dependency>
       <groupId>io.jenkins.plugins</groupId>
       <artifactId>javax-mail-api</artifactId>
-      <version>1.6.2-5</version>
+      <version>1.6.2-6</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
