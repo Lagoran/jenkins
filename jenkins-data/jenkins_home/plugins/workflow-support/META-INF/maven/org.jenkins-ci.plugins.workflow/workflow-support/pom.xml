@@ -27,7 +27,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.jenkins-ci.plugins.workflow</groupId>
   <artifactId>workflow-support</artifactId>
-  <version>820.vd1a_6cc65ef33</version>
+  <version>827.v7ef666c4d65c</version>
   <packaging>hpi</packaging>
   <name>Pipeline: Supporting APIs</name>
   <description>The Jenkins Plugins Parent POM Project</description>
@@ -42,7 +42,7 @@
   <scm>
     <connection>scm:git:https://github.com/jenkinsci/workflow-support-plugin.git</connection>
     <developerConnection>scm:git:git@github.com:jenkinsci/workflow-support-plugin.git</developerConnection>
-    <tag>d1a6cc65ef338ba25188b3b9ced928f776a97a87</tag>
+    <tag>7ef666c4d65c0f491bbec7608294b8b477b49e76</tag>
     <url>https://github.com/jenkinsci/workflow-support-plugin</url>
   </scm>
   <distributionManagement>
@@ -59,37 +59,37 @@
     <dependency>
       <groupId>org.jenkins-ci.plugins.workflow</groupId>
       <artifactId>workflow-step-api</artifactId>
-      <version>622.vb_8e7c15b_c95a_</version>
+      <version>625.vd896b_f445a_f8</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.jenkins-ci.plugins.workflow</groupId>
       <artifactId>workflow-api</artifactId>
-      <version>1143.v2d42f1e9dea_5</version>
+      <version>1164.v760c223ddb_32</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.jenkins-ci.plugins</groupId>
       <artifactId>scm-api</artifactId>
-      <version>602.v6a_81757a_31d2</version>
+      <version>608.vfa_f971c5a_a_e9</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.jenkins-ci.plugins</groupId>
       <artifactId>script-security</artifactId>
-      <version>1145.vb_cf6cf6ed960</version>
+      <version>1175.v4b_d517d6db_f0</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>io.jenkins.plugins</groupId>
       <artifactId>caffeine-api</artifactId>
-      <version>2.9.2-29.v717aac953ff3</version>
+      <version>2.9.3-65.v6a_47d0f4d1fe</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.jboss.marshalling</groupId>
       <artifactId>jboss-marshalling-river</artifactId>
-      <version>2.0.12.Final</version>
+      <version>2.1.0.Final</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -142,7 +142,7 @@
       <plugin>
         <groupId>org.jenkins-ci.tools</groupId>
         <artifactId>maven-hpi-plugin</artifactId>
-        <version>3.27</version>
+        <version>3.28</version>
         <extensions>true</extensions>
       </plugin>
       <plugin>

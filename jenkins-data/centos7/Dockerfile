@@ -14,4 +14,11 @@ RUN chown remote_user:remote_user -R /home/remote_user/.ssh/ && \
 
 RUN /usr/sbin/sshd-keygen
 
+RUN yum -y install mysql
+
+RUN yum -y install epel-release && \
+    yum -y install python3-pip && \
+    pip3 install --upgrade pip && \
+    pip3 install awscli
+
 CMD /usr/sbin/sshd -D

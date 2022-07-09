@@ -232,7 +232,7 @@ var FormChecker = {
         this.sendRequest(next.url, {
             method : next.method,
             onComplete : function(x) {
-                updateValidationArea(next.target, x.responseText);
+                applyErrorMessage(next.target, x);
                 FormChecker.inProgress--;
                 FormChecker.schedule();
                 layoutUpdateCallback.call();
@@ -500,53 +500,16 @@ var tooltip;
 // Behavior rules
 //========================================================
 // using tag names in CSS selector makes the processing faster
-
-
-/**
- * Updates the validation area for a form element
- * @param {HTMLElement} validationArea The validation area for a given form element
- * @param {string} content The content to update the validation area with
- */
-function updateValidationArea(validationArea, content) {
-  validationArea.classList.add("validation-error-area--visible");
-
-  if (content === "<div/>") {
-    validationArea.classList.remove("validation-error-area--visible");
-    validationArea.style.height = "0px";
-    validationArea.innerHTML = content;
-  } else {
-    // Only change content if different, causes an unnecessary animation otherwise
-    if (validationArea.innerHTML !== content) {
-      validationArea.innerHTML = content;
-      validationArea.style.height = validationArea.children[0].offsetHeight + "px";
-
-      // Only include the notice in the validation-error-area, move all other elements out
-      if (validationArea.children.length > 1) {
-        Array.from(validationArea.children).slice(1).forEach((element) => {
-          validationArea.after(element);
-        })
-      }
-
-      Behaviour.applySubtree(validationArea);
-      // For errors with additional details, apply the subtree to the expandable details pane
-      if (validationArea.nextElementSibling) {
-        Behaviour.applySubtree(validationArea.nextElementSibling);
-      }
-    }
-  }
-}
-
 function registerValidator(e) {
 
     // Retrieve the validation error area
-    var tr = e.closest(".jenkins-form-item").querySelector(".validation-error-area");
+    var tr = findFollowingTR(e, "validation-error-area");
     if (!tr) {
-        console.warn("Couldn't find the expected validation element (.validation-error-area) for element",
-          e.closest(".jenkins-form-item"))
+        console.warn("Couldn't find the expected parent element (.setting-main) for element", e)
         return;
     }
     // find the validation-error-area
-    e.targetElement = tr;
+    e.targetElement = tr.firstElementChild.nextSibling;
 
     e.targetUrl = function() {
         var url = this.getAttribute("checkUrl");
@@ -582,13 +545,19 @@ function registerValidator(e) {
     }
 
     var checker = function() {
-        const validationArea = this.targetElement;
+        var target = this.targetElement;
         FormChecker.sendRequest(this.targetUrl(), {
             method : method,
-            onComplete: function({status, responseText}) {
-              // TODO Add i18n support
-              const errorMessage = `<div class="error">An internal error occurred during form field validation (HTTP ${status}). Please reload the page and if the problem persists, ask the administrator for help.</div>`;
-              updateValidationArea(validationArea, status === 200 ? responseText : errorMessage);
+            onComplete : function(x) {
+                if (x.status == 200) {
+                    // All FormValidation responses are 200
+                    target.innerHTML = x.responseText;
+                } else {
+                    // Content is taken from FormValidation#_errorWithMarkup
+                    // TODO Add i18n support
+                    target.innerHTML = "<div class='error'>An internal error occurred during form field validation (HTTP " + x.status + "). Please reload the page and if the problem persists, ask the administrator for help.</div>";
+                }
+                Behaviour.applySubtree(target);
             }
         });
     }
@@ -615,25 +584,22 @@ function registerValidator(e) {
 }
 
 function registerRegexpValidator(e,regexp,message) {
-    var tr = e.closest(".jenkins-form-item").querySelector( ".validation-error-area");
+    var tr = findFollowingTR(e, "validation-error-area");
     if (!tr) {
-        console.warn("Couldn't find the expected parent element (.setting-main) for element",
-          e.closest(".jenkins-form-item"))
+        console.warn("Couldn't find the expected parent element (.setting-main) for element", e)
         return;
     }
     // find the validation-error-area
-    e.targetElement = tr;
+    e.targetElement = tr.firstElementChild.nextSibling;
     var checkMessage = e.getAttribute('checkMessage');
     if (checkMessage) message = checkMessage;
     var oldOnchange = e.onchange;
     e.onchange = function() {
         var set = oldOnchange != null ? oldOnchange.call(this) : false;
         if (this.value.match(regexp)) {
-            if (!set) {
-                updateValidationArea(this.targetElement, `<div/>`)
-            }
+            if (!set) this.targetElement.innerHTML = "<div/>";
         } else {
-            updateValidationArea(this.targetElement, `<div class="error">${message}</div>`);
+            this.targetElement.innerHTML = "<div class=error>" + message + "</div>";
             set = true;
         }
         return set;
@@ -647,14 +613,13 @@ function registerRegexpValidator(e,regexp,message) {
  * @param e Input element
  */
 function registerMinMaxValidator(e) {
-    var tr = e.closest(".jenkins-form-item").querySelector( ".validation-error-area");
+    var tr = findFollowingTR(e, "validation-error-area");
     if (!tr) {
-        console.warn("Couldn't find the expected parent element (.setting-main) for element",
-          e.closest(".jenkins-form-item"))
+        console.warn("Couldn't find the expected parent element (.setting-main) for element", e)
         return;
     }
     // find the validation-error-area
-    e.targetElement = tr;
+    e.targetElement = tr.firstElementChild.nextSibling;
     var checkMessage = e.getAttribute('checkMessage');
     if (checkMessage) message = checkMessage;
     var oldOnchange = e.onchange;
@@ -673,35 +638,29 @@ function registerMinMaxValidator(e) {
 
                 if (min <= max) {  // Add the validator if min <= max
                     if (parseInt(min) > parseInt(this.value) || parseInt(this.value) > parseInt(max)) {  // The value is out of range
-                        updateValidationArea(this.targetElement, `<div class="error">This value should be between ${min} and ${max}</div>`);
+                        this.targetElement.innerHTML = "<div class=error>This value should be between " + min + " and " + max + "</div>";
                         set = true;
                     } else {
-                        if (!set) {
-                          updateValidationArea(this.targetElement, `<div/>`)
-                        }
+                        if (!set) this.targetElement.innerHTML = "<div/>";  // The value is valid
                     }
                 }
 
             } else if ((min !== null && isInteger(min)) && (max === null || !isInteger(max))) {  // There is only 'min' available
 
                 if (parseInt(min) > parseInt(this.value)) {
-                    updateValidationArea(this.targetElement, `<div class="error">This value should be larger than ${min}</div>`);
+                    this.targetElement.innerHTML = "<div class=error>This value should be larger than " + min + "</div>";
                     set = true;
                 } else {
-                    if (!set) {
-                      updateValidationArea(this.targetElement, `<div/>`)
-                    }
+                    if (!set) this.targetElement.innerHTML = "<div/>";
                 }
 
             } else if ((min === null || !isInteger(min)) && (max !== null && isInteger(max))) {  // There is only 'max' available
 
                 if (parseInt(max) < parseInt(this.value)) {
-                    updateValidationArea(this.targetElement, `<div class="error">This value should be less than ${max}</div>`);
+                    this.targetElement.innerHTML = "<div class=error>This value should be less than " + max + "</div>";
                     set = true;
                 } else {
-                    if (!set) {
-                      updateValidationArea(this.targetElement, `<div/>`)
-                    }
+                    if (!set) this.targetElement.innerHTML = "<div/>";
                 }
             }
         }
@@ -1175,40 +1134,63 @@ function rowvgStartEachRow(recursive,f) {
             });
     });
 
-    // Native browser resizing doesn't work for CodeMirror textboxes so let's create our own
-    Behaviour.specify(".CodeMirror", "codemirror", ++p, function(codemirror) {
-      const MIN_HEIGHT = 200;
+    // resizable text area
+    Behaviour.specify("TEXTAREA", "textarea", ++p, function(textarea) {
+        if(Element.hasClassName(textarea,"rich-editor")) {
+            // rich HTML editor
+            try {
+                var editor = new YAHOO.widget.Editor(textarea, {
+                    dompath: true,
+                    animate: true,
+                    handleSubmit: true
+                });
+                // probably due to the timing issue, we need to let the editor know
+                // that DOM is ready
+                editor.DOMReady=true;
+                editor.fireQueue();
+                editor.render();
+                layoutUpdateCallback.call();
+            } catch(e) {
+                alert(e);
+            }
+            return;
+        }
 
-      const resizer = document.createElement("div");
-      resizer.className = "jenkins-codemirror-resizer";
+        // CodeMirror inserts a wrapper element next to the textarea.
+        // textarea.nextSibling may not be the handle.
+        var handles = findElementsBySelector(textarea.parentNode, ".textarea-handle");
+        if(handles.length != 1) return;
+        var handle = handles[0];
 
-      let start_x;
-      let start_y;
-      let start_h;
+        var Event = YAHOO.util.Event;
 
-      function height_of($el) {
-        return parseInt(window.getComputedStyle($el).height.replace(/px$/, ""));
-      }
-
-      function on_drag(e) {
-        codemirror.CodeMirror.setSize(null, Math.max(MIN_HEIGHT, (start_h + e.y - start_y)) + "px");
-      }
-
-      function on_release() {
-        document.body.removeEventListener("mousemove", on_drag);
-        window.removeEventListener("mouseup", on_release);
-      }
-
-      resizer.addEventListener("mousedown", function (e) {
-        start_x = e.x;
-        start_y = e.y;
-        start_h = height_of(codemirror);
-
-        document.body.addEventListener("mousemove", on_drag);
-        window.addEventListener("mouseup", on_release);
-      });
-
-      codemirror.parentNode.insertBefore(resizer, codemirror.nextSibling);
+        function getCodemirrorScrollerOrTextarea(){
+            return textarea.codemirrorObject ? textarea.codemirrorObject.getScrollerElement() : textarea;
+        }
+        handle.onmousedown = function(ev) {
+            ev = Event.getEvent(ev);
+            var s = getCodemirrorScrollerOrTextarea();
+            var offset = s.offsetHeight-Event.getPageY(ev);
+            s.style.opacity = 0.5;
+            document.onmousemove = function(ev) {
+                ev = Event.getEvent(ev);
+                function max(a,b) { if(a<b) return b; else return a; }
+                s.style.height = max(32, offset + Event.getPageY(ev)) + 'px';
+                layoutUpdateCallback.call();
+                return false;
+            };
+            document.onmouseup = function() {
+                document.onmousemove = null;
+                document.onmouseup = null;
+                var s = getCodemirrorScrollerOrTextarea();
+                s.style.opacity = 1;
+            }
+        };
+        handle.ondblclick = function() {
+            var s = getCodemirrorScrollerOrTextarea();
+            s.style.height = "1px"; // To get actual height of the textbox, shrink it and show its scrollbar
+            s.style.height = s.scrollHeight + 'px';
+        }
     });
 
     // structured form submission
@@ -1421,7 +1403,7 @@ function rowvgStartEachRow(recursive,f) {
     });
 
     Behaviour.specify("DIV.behavior-loading", "div-behavior-loading", ++p, function(e) {
-        e.classList.add("behavior-loading--hidden");
+        e.style.display = 'none';
     });
 
     Behaviour.specify(".button-with-dropdown", "-button-with-dropdown", ++p, function (e) {
@@ -1856,6 +1838,13 @@ Form.findMatchingInput = function(base, name) {
     return null;        // not found
 }
 
+function onBuildHistoryChange(handler) {
+    Event.observe(window, 'jenkins:buildHistoryChanged', handler);
+}
+function fireBuildHistoryChanged() {
+    Event.fire(window, 'jenkins:buildHistoryChanged');
+}
+
 function toQueryString(params) {
     var query = '';
     if (params) {
@@ -1909,6 +1898,52 @@ function getStyle(e,a){
     return e.currentStyle[a];
   return null;
 }
+
+function ElementResizeTracker() {
+    this.trackedElements = [];
+
+    if(isRunAsTest) {
+        return;
+    }
+
+    var thisTracker = this;
+    function checkForResize() {
+        for (var i = 0; i < thisTracker.trackedElements.length; i++) {
+            var element = thisTracker.trackedElements[i];
+            var currDims = Element.getDimensions(element);
+            var lastDims = element.lastDimensions;
+            if (currDims.width !== lastDims.width || currDims.height !== lastDims.height) {
+                Event.fire(element, 'jenkins:resize');
+            }
+            element.lastDimensions = currDims;
+        }
+    }
+    Event.observe(window, 'jenkins:resizeCheck', checkForResize);
+
+    function checkForResizeLoop() {
+        checkForResize();
+        setTimeout(checkForResizeLoop, 200);
+    }
+    checkForResizeLoop();
+}
+ElementResizeTracker.prototype.addElement = function(element) {
+    for (var i = 0; i < this.trackedElements.length; i++) {
+        if (this.trackedElements[i] === element) {
+            // we're already tracking it so no need to add it.
+            return;
+        }
+    }
+    this.trackedElements.push(element);
+}
+ElementResizeTracker.prototype.onResize = function(element, handler) {
+    element.lastDimensions = Element.getDimensions(element);
+    Event.observe(element, 'jenkins:resize', handler);
+    this.addElement(element);
+}
+ElementResizeTracker.fireResizeCheck = function() {
+    Event.fire(window, 'jenkins:resizeCheck');
+}
+var elementResizeTracker = new ElementResizeTracker();
 
 /**
  * Makes sure the given element is within the viewport.
@@ -2212,7 +2247,7 @@ function buildFormTree(form) {
 var toggleCheckboxes = function(toggle) {
     var inputs = document.getElementsByTagName("input");
     for(var i=0; i<inputs.length; i++) {
-        if(inputs[i].type === "checkbox" && !inputs[i].disabled) {
+        if(inputs[i].type === "checkbox") {
             inputs[i].checked = toggle;
         }
     }
@@ -2342,16 +2377,15 @@ function validateButton(checkUrl,paramList,button) {
       }
   });
 
-  var spinner = button.up("DIV").children[0];
-  var target = spinner.next().next();
+  var spinner = $(button).up("DIV").next();
+  var target = spinner.next();
   spinner.style.display="block";
 
   new Ajax.Request(checkUrl, {
       parameters: parameters,
       onComplete: function(rsp) {
           spinner.style.display="none";
-          target.innerHTML = `<div class="validation-error-area" />`;
-          updateValidationArea(target.children[0], rsp.responseText);
+          applyErrorMessage(target, rsp);
           layoutUpdateCallback.call();
           var s = rsp.getResponseHeader("script");
           try {
@@ -2361,6 +2395,26 @@ function validateButton(checkUrl,paramList,button) {
           }
       }
   });
+}
+
+function applyErrorMessage(elt, rsp) {
+    if (rsp.status == 200) {
+        elt.innerHTML = rsp.responseText;
+    } else {
+        var id = 'valerr' + (iota++);
+        elt.innerHTML = '<a href="" onclick="document.getElementById(\'' + id
+        + '\').style.display=\'block\';return false">ERROR</a><div id="'
+        + id + '" style="display:none">' + rsp.responseText + '</div>';
+        var error = document.getElementById('error-description'); // cf. oops.jelly
+        if (error) {
+            var div = document.getElementById(id);
+            while (div.firstElementChild) {
+                div.removeChild(div.firstElementChild);
+            }
+            div.appendChild(error);
+        }
+    }
+    Behaviour.applySubtree(elt);
 }
 
 // create a combobox.

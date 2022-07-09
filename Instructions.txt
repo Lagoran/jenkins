@@ -1,3 +1,6 @@
+-How To Run Linux Code on Windows with WSL 2 & VS Code
+    https://www.youtube.com/watch?v=bRW5r7TK6KM&ab_channel=TypeScriptTV
+
 -Install Docker on Ubuntu 20.04 LTS
     https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04
 
