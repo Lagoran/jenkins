@@ -1,4 +1,8 @@
+##General course instructions
+    https://github.com/ricardoandre97/jenkins-resources/tree/master/jenkins
+
 -How To Run Linux Code on Windows with WSL 2 & VS Code
+    https://pureinfotech.com/install-windows-subsystem-linux-2-windows-10/
     https://www.youtube.com/watch?v=bRW5r7TK6KM&ab_channel=TypeScriptTV
 
 -Install Docker on Ubuntu 20.04 LTS
