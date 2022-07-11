@@ -1,0 +1,4 @@
+- hosts: test
+  tasks:
+    - shell: echo Hello World from Ansible and Lyulin10... > /tmp/ansible-file
+
